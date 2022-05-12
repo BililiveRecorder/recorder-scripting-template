@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "checkJs": true,
+        "module": "none",
+        "target": "es2020",
+        "lib": [
+            "es6"
+        ]
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
