@@ -2,6 +2,24 @@ recorderEvents = {
     onTest(alert) {
         alert('script test')
     },
+    onDanmaku(json) {
+        const d = JSON.parse(json);
+
+        if (typeof d.msg === 'string' && d.msg.startWith('DANMU_MSG:'))
+            d.msg = 'DANMU_MSG';
+
+        switch (d.cmd) {
+            case 'DANMU_MSG':
+                const 不是红包弹幕 = !d['info'][0][9];
+                const 不是表情弹幕 = typeof d['info'][0][13] !== 'object';
+                return 不是红包弹幕 && 不是表情弹幕;
+            case 'SEND_GIFT':
+                // 不记录免费礼物
+                return d.data.coin_type !== 'silver';
+            default:
+                return true;
+        }
+    },
     onTransformStreamUrl(originalUrl) {
         const match = /^(https?\:\/\/)cn-[^/]*(.bilivideo.com\/live-bvc\/.*&cdn=)([^&]*)(.*)$/.exec(originalUrl)
         if (match) {

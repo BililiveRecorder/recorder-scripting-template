@@ -8,6 +8,12 @@ declare var recorderEvents: {
     onTest?: (alert: (message?: any) => void) => void;
 
     /**
+     * 过滤弹幕消息。  
+     * 写入 XML 文件之前会调用，如果返回 false 就不会写入。
+     */
+    onDanmaku?: (json: string) => boolean;
+
+    /**
      * 获取直播流地址，每次尝试开始录播调用一次。  
      * 如果返回了 null 会使用录播姬默认逻辑获取直播流地址。  
      * 如果返回了 string 则无条件使用脚本给的地址。
