@@ -5,7 +5,7 @@ recorderEvents = {
     onDanmaku(json) {
         const d = JSON.parse(json);
 
-        if (typeof d.msg === 'string' && d.msg.startWith('DANMU_MSG:'))
+        if (typeof d.msg === 'string' && d.msg.startsWith('DANMU_MSG:'))
             d.msg = 'DANMU_MSG';
 
         switch (d.cmd) {
