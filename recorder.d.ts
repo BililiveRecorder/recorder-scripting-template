@@ -46,6 +46,57 @@ interface Console {
     warn(...data: any[]): void;
 }
 
+interface Storage {
+    readonly length: number;
+    clear(): void;
+    getItem(key: string): string | null;
+    key(index: number): string | null;
+    removeItem(key: string): void;
+    setItem(key: string, value: string): void;
+}
+
+declare var sharedStorage: Storage;
+
+interface URL {
+    hash: string;
+    host: string;
+    hostname: string;
+    href: string;
+    readonly origin: string;
+    username: string;
+    password: string;
+    pathname: string;
+    port: string;
+    protocol: string;
+    search: string;
+    readonly searchParams: URLSearchParams;
+    toString(): string;
+    toJSON(): string;
+}
+
+declare var URL: {
+    prototype: URL;
+    new(url: string, base?: string): URL;
+};
+
+interface URLSearchParams {
+    append(name: string, value: string): void;
+    delete(name: string): void;
+    get(name: string): string | null;
+    getAll(name: string): string[];
+    has(name: string): boolean;
+    set(name: string, value: string): void;
+    /** @deprecated not implemented */
+    sort(): void;
+    toString(): string;
+    forEach(callbackfn: (value: string, key: string, parent: URLSearchParams) => void, thisArg?: any): void;
+}
+
+declare var URLSearchParams: {
+    prototype: URLSearchParams;
+    new(init?: Record<string, string> | string ): URLSearchParams;
+};
+
 declare var dns: DNS;
 declare interface DNS {
     /**
