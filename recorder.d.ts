@@ -27,6 +27,54 @@ declare var recorderEvents: {
      * 或返回 {url:string, ip?:string} 在修改直播流地址的同时指定连接的 IP 地址
      */
     onTransformStreamUrl?: (originalUrl: string) => string | { url: string, ip?: string } | null;
+
+    /**
+     * 修改发给弹幕服务器的握手包 JSON。
+     * 需要注意握手包会影响到弹幕服务器返回的消息格式，导致直播服务器返回录播姬不支持的数据。
+     * @param roomInfo 当前直播间信息
+     * @param json 原握手包 JSON
+     * @returns 返回 null 意为不做修改，或返回修改后的 JSON 文本
+     */
+    onDanmakuHandshake?: (roomInfo: RoomInfo, json: string) => string | null;
+}
+
+interface RoomInfo {
+    /**
+     * 原房间号
+     * @example 123456
+     */
+    readonly roomId: number;
+
+    /**
+     * 直播间短号，没有的为 0
+     * @example 0
+     */
+    readonly shortId: 0 | number;
+
+    /**
+     * 主播名字
+     */
+    readonly name: string;
+
+    /**
+     * 直播间标题
+     */
+    readonly title: string;
+
+    /**
+     * 直播间父分区
+     */
+    readonly areaParent: string;
+
+    /**
+     * 直播间子分区
+     */
+    readonly areaChild: string;
+
+    /**
+     * 录播姬内部对象 ID，与 API 中的 objectId 相同，重启后会变化
+     */
+    readonly objectId: string;
 }
 
 declare var console: Console;
@@ -94,7 +142,7 @@ interface URLSearchParams {
 
 declare var URLSearchParams: {
     prototype: URLSearchParams;
-    new(init?: Record<string, string> | string ): URLSearchParams;
+    new(init?: Record<string, string> | string): URLSearchParams;
 };
 
 declare var dns: DNS;
