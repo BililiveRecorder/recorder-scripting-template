@@ -75,6 +75,12 @@ interface RoomInfo {
      * 录播姬内部对象 ID，与 API 中的 objectId 相同，重启后会变化
      */
     readonly objectId: string;
+
+    /**
+     * B站直播 API 返回的原始数据。与文件名模板的 `json` 变量相同。
+     * @see https://rec.danmuji.org/user/file-name-template/#json
+     */
+    readonly apiData: any;
 }
 
 declare var console: Console;
